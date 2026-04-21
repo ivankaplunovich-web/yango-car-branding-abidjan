@@ -1,2 +1,11 @@
 .DS_Store
 ~$*
+
+# Working materials that should stay local, not in the production repo
+Car Wrapping Examples/
+docs/
+*.xlsx
+*.xls
+*.pdf
+*.pptx
+comparison-mockup-*.html
