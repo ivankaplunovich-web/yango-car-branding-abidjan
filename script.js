@@ -83,8 +83,6 @@ const formatUsdPrecise = new Intl.NumberFormat("en-US", {
 });
 
 const form = document.getElementById("planner-form");
-const proposalForm = document.getElementById("proposal-form");
-
 const carsValue = document.getElementById("cars-value");
 const monthsValue = document.getElementById("months-value");
 const classValue = document.getElementById("class-value");
@@ -110,8 +108,6 @@ const barBillboardLabel = document.getElementById("bar-billboard-label");
 const impYangoLabel = document.getElementById("imp-yango-label");
 const impSocialLabel = document.getElementById("imp-social-label");
 const impBillboardLabel = document.getElementById("imp-billboard-label");
-
-const responseOutput = document.getElementById("form-response");
 
 function formatUsd(value) {
   const rounded = Math.round(Math.abs(value));
@@ -224,15 +220,6 @@ function handlePlannerInput() {
 
 ["input", "change"].forEach((eventName) => {
   form.addEventListener(eventName, handlePlannerInput);
-});
-
-proposalForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const name = document.getElementById("client-name").value.trim() || "Your team";
-  const company = document.getElementById("company-name").value.trim() || "your brand";
-
-  responseOutput.textContent = `${name}, your brief for ${company} is ready for the Yango team to shape into a launch proposal.`;
 });
 
 updateSelectionLabels();

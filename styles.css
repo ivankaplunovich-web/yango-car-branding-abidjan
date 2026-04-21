@@ -179,7 +179,6 @@ textarea {
 .detail-card p,
 .process-card p,
 .proposal-note li,
-.proposal-form .form-response,
 .results-hero p,
 .brief-card {
   color: rgba(7, 7, 7, 0.74);
@@ -956,7 +955,6 @@ textarea {
 .proof-metric-card,
 .planner-panel,
 .results-panel,
-.proposal-form,
 .proposal-note {
   border-radius: var(--radius-lg);
 }
@@ -1346,8 +1344,7 @@ textarea {
   grid-template-columns: 0.96fr 1.04fr;
 }
 
-.planner-panel,
-.proposal-form {
+.planner-panel {
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.82);
   border: 1px solid rgba(7, 7, 7, 0.07);
@@ -1690,6 +1687,14 @@ textarea {
   grid-template-columns: 0.92fr 1.08fr;
 }
 
+.proposal-grid-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.proposal-grid-single .proposal-copy {
+  max-width: 72rem;
+}
+
 .proposal-note {
   margin-top: 1.5rem;
   padding: 1.2rem 1.25rem;
@@ -1752,16 +1757,6 @@ textarea {
 
 .proposal-contact-card a {
   color: var(--brand-red-deep);
-}
-
-.proposal-form {
-  display: grid;
-  gap: 0.95rem;
-}
-
-.form-response {
-  min-height: 1.35rem;
-  margin: 0;
 }
 
 .site-footer {
@@ -1963,7 +1958,6 @@ textarea {
   }
 
   .planner-panel,
-  .proposal-form,
   .results-panel {
     padding: 1.2rem;
   }
@@ -2122,7 +2116,6 @@ textarea {
 
   .planner-panel,
   .results-panel,
-  .proposal-form,
   .comparison-table-shell,
   .proof-stage,
   .proof-reasons {
@@ -2178,7 +2171,6 @@ textarea {
   .detail-card p,
   .process-card p,
   .proposal-note li,
-  .proposal-form .form-response,
   .results-hero p,
   .brief-card,
   .proof-editorial-copy p,
@@ -2196,7 +2188,6 @@ textarea {
   .hero-audience-panel,
   .planner-panel,
   .results-panel,
-  .proposal-form,
   .proposal-note,
   .proof-stage,
   .proof-reasons {
@@ -2205,7 +2196,6 @@ textarea {
 
   .planner-panel,
   .results-panel,
-  .proposal-form,
   .proposal-note,
   .proof-stage {
     padding: 1rem;
