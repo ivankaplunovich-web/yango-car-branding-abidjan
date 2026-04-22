@@ -1,0 +1,61 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="32" fill="#F5F3F0"/>
+  <rect x="34" y="34" width="1132" height="562" rx="30" fill="url(#paint0_linear)"/>
+  <rect x="34" y="34" width="1132" height="562" rx="30" stroke="rgba(10,10,10,0.08)"/>
+  <circle cx="116" cy="120" r="26" fill="#FF0000"/>
+  <circle cx="116" cy="120" r="38" stroke="#FF0000" stroke-opacity="0.15" stroke-width="12"/>
+  <text x="164" y="133" fill="#0B0B0B" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="700">
+    Yango Car Branding
+  </text>
+  <text x="86" y="224" fill="#C71B1B" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="3">
+    ABIDJAN MOVING MEDIA
+  </text>
+  <text x="86" y="310" fill="#0B0B0B" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="700">
+    Put your brand on the
+  </text>
+  <text x="86" y="386" fill="#0B0B0B" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="700">
+    streets, not just another
+  </text>
+  <text x="86" y="462" fill="#0B0B0B" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="700">
+    billboard.
+  </text>
+  <text x="86" y="532" fill="#3F3F46" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="400">
+    Citywide taxi branding campaigns with a premium planner for Abidjan.
+  </text>
+  <rect x="774" y="112" width="300" height="404" rx="28" fill="#121821"/>
+  <rect x="809" y="160" width="224" height="42" rx="21" fill="rgba(255,255,255,0.08)"/>
+  <text x="839" y="188" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">
+    Yango car branding
+  </text>
+  <text x="816" y="248" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700">
+    95%
+  </text>
+  <text x="909" y="248" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600">
+    recall
+  </text>
+  <text x="816" y="324" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700">
+    $0.07
+  </text>
+  <text x="925" y="324" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600">
+    CPM
+  </text>
+  <text x="816" y="400" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700">
+    Full-city
+  </text>
+  <text x="816" y="438" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600">
+    access across Abidjan
+  </text>
+  <rect x="808" y="466" width="206" height="16" rx="8" fill="rgba(255,255,255,0.1)"/>
+  <rect x="808" y="466" width="176" height="16" rx="8" fill="url(#paint1_linear)"/>
+  <defs>
+    <linearGradient id="paint0_linear" x1="91" y1="78" x2="1096" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9F8"/>
+      <stop offset="0.56" stop-color="#F7F6F3"/>
+      <stop offset="1" stop-color="#FFF3F2"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear" x1="808" y1="474" x2="984" y2="474" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#FF0000"/>
+    </linearGradient>
+  </defs>
+</svg>
