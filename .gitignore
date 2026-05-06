@@ -4,6 +4,7 @@
 # Working materials that should stay local, not in the production repo
 Car Wrapping Examples/
 docs/
+data/
 *.xlsx
 *.xls
 *.pdf
