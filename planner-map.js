@@ -31,6 +31,22 @@
 
   const vehicleMarkup =
     '<img class="planner-fleet-car-sprite" src="./assets/vehicles/car-topview-uxwing-base.svg" alt="" />';
+  const mapCopy = {
+    en: {
+      aria: "OpenStreetMap based Abidjan coverage view with representative branded fleet motion",
+      attribution: "Map data © OpenStreetMap contributors · representative 300-car campaign view",
+      labels: {
+        "Airport road": "Airport road",
+      },
+    },
+    fr: {
+      aria: "Vue de couverture d'Abidjan basee sur OpenStreetMap avec mouvement de flotte representative",
+      attribution: "Donnees carte © contributeurs OpenStreetMap · vue representative d'une campagne 300 voitures",
+      labels: {
+        "Airport road": "Route aeroport",
+      },
+    },
+  };
 
   const routeSampleStep = 8;
   const maxTurnRate = 160;
@@ -531,7 +547,18 @@
     return node;
   }
 
+  function getMapCopy(language) {
+    return mapCopy[language] || mapCopy.en;
+  }
+
+  function localizeLabel(name, language) {
+    const copy = getMapCopy(language);
+    return copy.labels[name] || name;
+  }
+
   function renderBaseMap() {
+    const language = window.YANGO_PLANNER_LANGUAGE || "en";
+    const copy = getMapCopy(language);
     const roadOrder = { street: 0, connector: 1, major: 2 };
     const roads = [...data.roads].sort((a, b) => roadOrder[a.tier] - roadOrder[b.tier]);
     const visibleRoads = roads
@@ -545,7 +572,7 @@
         viewBox="0 0 ${data.meta.width} ${data.meta.height}"
         preserveAspectRatio="none"
         role="img"
-        aria-label="OpenStreetMap based Abidjan coverage view with representative branded fleet motion"
+        aria-label="${escapeHtml(copy.aria)}"
       >
         <rect class="planner-map-bg" width="${data.meta.width}" height="${data.meta.height}" />
         <g class="planner-water-layer">
@@ -562,13 +589,24 @@
           (label) => `
             <span
               class="planner-map-label ${label.type === "city" ? "planner-map-label-city" : ""}"
+              data-label-name="${escapeHtml(label.name)}"
               style="left: ${(label.point[0] / data.meta.width) * 100}%; top: ${(label.point[1] / data.meta.height) * 100}%; --label-dx: ${label.dx || 0}px; --label-dy: ${label.dy || 0}px"
-            >${escapeHtml(label.name)}</span>
+            >${escapeHtml(localizeLabel(label.name, language))}</span>
           `,
         )
         .join("")}
-      <p class="planner-map-attribution">Map data © OpenStreetMap contributors · representative 300-car campaign view</p>
+      <p class="planner-map-attribution">${escapeHtml(copy.attribution)}</p>
     `;
+  }
+
+  function setMapLanguage(language) {
+    const copy = getMapCopy(language);
+    target.querySelector(".planner-abidjan-map")?.setAttribute("aria-label", copy.aria);
+    target.querySelectorAll("[data-label-name]").forEach((label) => {
+      label.textContent = localizeLabel(label.dataset.labelName, language);
+    });
+    const attribution = target.querySelector(".planner-map-attribution");
+    if (attribution) attribution.textContent = copy.attribution;
   }
 
   function renderVehiclePose(vehicle, pose) {
@@ -707,6 +745,7 @@
   startAnimation();
 
   window.updatePlannerMapFleet = setMapFleetFromCars;
+  window.updatePlannerMapLanguage = setMapLanguage;
 
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {

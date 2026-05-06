@@ -81,8 +81,15 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 0.72rem;
+  min-width: 0;
   font-weight: 800;
   letter-spacing: -0.03em;
+}
+
+.brand-mark span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .brand-dot {
@@ -99,6 +106,53 @@ textarea {
   gap: 1.25rem;
   color: rgba(7, 7, 7, 0.76);
   font-size: 0.95rem;
+}
+
+.header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.language-switcher {
+  display: inline-grid;
+  flex: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.12rem;
+  padding: 0.15rem;
+  border-radius: 999px;
+  background: rgba(7, 7, 7, 0.055);
+  border: 1px solid rgba(7, 7, 7, 0.08);
+}
+
+.language-switcher button {
+  min-width: 2.15rem;
+  min-height: 1.75rem;
+  padding: 0 0.55rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(7, 7, 7, 0.62);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.language-switcher button[aria-pressed="true"] {
+  background: #070707;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(7, 7, 7, 0.14);
+}
+
+.language-switcher button:focus-visible {
+  outline: 2px solid rgba(255, 0, 0, 0.55);
+  outline-offset: 2px;
 }
 
 .site-nav a:hover,
@@ -2625,6 +2679,13 @@ textarea {
     font-size: 0.95rem;
   }
 
+  .language-switcher button {
+    min-width: 1.9rem;
+    min-height: 1.55rem;
+    padding: 0 0.42rem;
+    font-size: 0.66rem;
+  }
+
   .brand-dot {
     box-shadow: 0 0 0 8px rgba(255, 0, 0, 0.08);
   }
@@ -2880,14 +2941,13 @@ body.compact-page {
 
 .compact-proof-header {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 1rem 2rem;
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.45rem;
+  align-items: start;
   margin-bottom: 1rem;
 }
 
 .compact-proof-header .eyebrow {
-  grid-column: 1 / -1;
   margin-bottom: 0;
 }
 
@@ -2898,8 +2958,9 @@ body.compact-page {
   line-height: 0.98;
 }
 
-.compact-proof-header p {
-  margin: 0 0 0.35rem;
+.compact-proof-header p:not(.eyebrow) {
+  max-width: 36rem;
+  margin: 0.05rem 0 0;
   color: rgba(7, 7, 7, 0.66);
   font-size: 1rem;
   line-height: 1.45;
@@ -3067,26 +3128,26 @@ body.compact-page {
 
 .compact-planner-heading {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: 0.5rem 1.5rem;
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.45rem;
+  align-items: start;
   margin-bottom: 1rem;
 }
 
 .compact-planner-heading .eyebrow {
-  grid-column: 1 / -1;
   margin-bottom: 0;
 }
 
 .compact-planner-heading h2 {
   max-width: 10ch;
+  margin: 0;
   font-size: 3.9rem;
   line-height: 0.98;
 }
 
-.compact-planner-heading p {
+.compact-planner-heading p:not(.eyebrow) {
   max-width: 29rem;
-  margin: 0 0 0.3rem;
+  margin: 0.05rem 0 0;
   color: rgba(7, 7, 7, 0.66);
   font-size: 1rem;
   line-height: 1.45;
@@ -3538,6 +3599,11 @@ body.compact-page {
   .compact-page .proposal-copy p {
     font-size: 0.94rem;
     line-height: 1.42;
+  }
+
+  .compact-proof-header p:not(.eyebrow),
+  .compact-planner-heading p:not(.eyebrow) {
+    max-width: 100%;
   }
 
   .compact-page .hero-location-row {
