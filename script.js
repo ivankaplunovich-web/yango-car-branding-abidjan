@@ -73,6 +73,11 @@ const benchmarks = {
   social: 2.7,
 };
 
+const proposalFormUrls = {
+  en: "https://forms.yandex.ru/surveys/13850501.cbf375e569cfdc6551eec2bd1067ad504bf5eed7",
+  fr: "https://forms.yandex.ru/surveys/13850502.773d2ad7cf8db43ddcfab8829cd896a0475d82d7",
+};
+
 const supportedLanguages = ["en", "fr"];
 const languageCopy = {
   en: {
@@ -189,10 +194,21 @@ const languageCopy = {
       [".proposal-process-strip li:nth-child(2) p", "Fleet size, wrap, duration."],
       [".proposal-process-strip li:nth-child(3) strong", "Launch"],
       [".proposal-process-strip li:nth-child(3) p", "Approve plan and roll out."],
+      [".proposal-action-card-lead span", "Sales Lead"],
+      [".proposal-action-card-lead strong", "Talk to Abdoulaye."],
+      [
+        ".proposal-action-card-lead p",
+        "Share timing, brand, and city focus directly with the local commercial lead.",
+      ],
+      [".proposal-action-card-form span", "Request form"],
+      [".proposal-action-card-form strong", "Send the planner."],
+      [
+        ".proposal-action-card-form p",
+        "Your selected cars, package, duration, and media estimate are attached automatically.",
+      ],
+      [".proposal-action-card-form [data-proposal-link]", "Fill request form"],
       [".partner-wall-note > strong", "Recognized partner footprint"],
       [".partner-wall-copy", "Brands already run across Yango markets."],
-      [".proposal-contact-card > strong", "Sales contact"],
-      [".proposal-contact-card li:nth-child(1)", "Abdoulaye Cisse Ouattara, Sales Lead"],
       [".site-footer p", "Yango Car Branding for Abidjan advertisers"],
       [".site-footer a", "Back to top"],
     ],
@@ -322,10 +338,21 @@ const languageCopy = {
       [".proposal-process-strip li:nth-child(2) p", "Taille de flotte, wrap, duree."],
       [".proposal-process-strip li:nth-child(3) strong", "Lancer"],
       [".proposal-process-strip li:nth-child(3) p", "Valider le plan et lancer."],
+      [".proposal-action-card-lead span", "Sales Lead"],
+      [".proposal-action-card-lead strong", "Parlez a Abdoulaye."],
+      [
+        ".proposal-action-card-lead p",
+        "Partagez le timing, la marque et les zones prioritaires directement avec le responsable commercial local.",
+      ],
+      [".proposal-action-card-form span", "Formulaire"],
+      [".proposal-action-card-form strong", "Envoyer le plan."],
+      [
+        ".proposal-action-card-form p",
+        "Les voitures, le package, la duree et l'estimation media selectionnes sont ajoutes automatiquement.",
+      ],
+      [".proposal-action-card-form [data-proposal-link]", "Remplir le formulaire"],
       [".partner-wall-note > strong", "Presence partenaires reconnue"],
       [".partner-wall-copy", "Des marques activent deja Yango sur plusieurs marches."],
-      [".proposal-contact-card > strong", "Contact commercial"],
-      [".proposal-contact-card li:nth-child(1)", "Abdoulaye Cisse Ouattara, Responsable commercial"],
       [".site-footer p", "Yango Car Branding pour les annonceurs d'Abidjan"],
       [".site-footer a", "Retour en haut"],
     ],
@@ -393,6 +420,7 @@ const impSocialLabel = document.getElementById("imp-social-label");
 const impBillboardLabel = document.getElementById("imp-billboard-label");
 const isCompactPage = document.body.classList.contains("compact-page");
 const languageButtons = document.querySelectorAll("[data-language-option]");
+const proposalLinks = document.querySelectorAll("[data-proposal-link]");
 
 const packageText = {
   en: {
@@ -663,6 +691,63 @@ function formatImpressions(value) {
   return formatNumber.format(Math.round(value));
 }
 
+function getPlannerSnapshot() {
+  const packageKey = getCheckedValue("package");
+  const classKey = getCheckedValue("vehicleClass");
+  const months = Number(getCheckedValue("months"));
+  const cars = Number(getCheckedValue("cars"));
+  const selectedPackage = packages[packageKey] || packages.full;
+  const selectedDuration = durations[months] || durations[3];
+  const selectedClass = vehicleClasses[classKey] || vehicleClasses.econom;
+
+  const budgetUsd =
+    pricingModel.baseCostUsdPerCarMonth *
+    selectedPackage.costMultiplier *
+    selectedDuration.costMultiplier *
+    selectedClass.costMultiplier *
+    cars *
+    months;
+
+  const projectedImpressions =
+    pricingModel.baseImpressionsPerCarMonth *
+    selectedPackage.impressionMultiplier *
+    selectedDuration.impressionMultiplier *
+    selectedClass.impressionMultiplier *
+    cars *
+    months;
+  const cpm = budgetUsd / projectedImpressions;
+  const savingsVsBillboard = projectedImpressions * benchmarks.billboard - budgetUsd;
+
+  return {
+    cars,
+    package: packageKey,
+    package_label: getPackageText(packageKey).label,
+    duration_months: months,
+    car_class: classKey,
+    car_class_label: getVehicleClassText(classKey).label,
+    budget_usd: Math.round(budgetUsd),
+    impressions: Math.round(projectedImpressions),
+    cpm: cpm.toFixed(2),
+    savings_usd: Math.round(savingsVsBillboard),
+    language: currentLanguage,
+    page_url: window.location.href,
+  };
+}
+
+function updateProposalLinks() {
+  const formUrl = proposalFormUrls[currentLanguage] || proposalFormUrls.en;
+  const snapshot = getPlannerSnapshot();
+  const url = new URL(formUrl);
+
+  Object.entries(snapshot).forEach(([key, value]) => {
+    url.searchParams.set(key, String(value));
+  });
+
+  proposalLinks.forEach((link) => {
+    link.href = url.toString();
+  });
+}
+
 function setBarWidth(element, width) {
   if (!element) return;
   element.style.width = width;
@@ -851,6 +936,8 @@ function updatePlanner() {
       )} budget and keeps ${formatUsd(
         savingsVsBillboard,
       )} in hand versus billboard CPM for the same level of exposure.`;
+
+  updateProposalLinks();
 }
 
 function handlePlannerInput() {
