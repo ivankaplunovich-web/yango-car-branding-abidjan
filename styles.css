@@ -3926,6 +3926,7 @@ body.compact-page {
   align-items: center;
   justify-content: center;
   min-width: 0;
+  min-height: clamp(12rem, 20vw, 18rem);
   margin: 0;
   aspect-ratio: 16 / 8.4;
   overflow: hidden;
@@ -3955,6 +3956,7 @@ body.compact-page {
 }
 
 .wrap-preview-frame.is-active {
+  z-index: 1;
   opacity: 1;
   transform: translateX(0) scale(1);
 }
@@ -4278,6 +4280,10 @@ body.compact-page {
 
   .wrap-preview-copy {
     padding: 0.15rem;
+  }
+
+  .wrap-preview-media {
+    min-height: clamp(12rem, 56vw, 18rem);
   }
 
   .proposal-process-strip {

@@ -78,6 +78,7 @@ const proposalFormUrls = {
   fr: "https://forms.yandex.ru/surveys/13850502.773d2ad7cf8db43ddcfab8829cd896a0475d82d7",
 };
 
+const brandingPreviewAssetVersion = "20260507-2";
 const supportedLanguages = ["en", "fr"];
 const languageCopy = {
   en: {
@@ -626,6 +627,10 @@ function getWrapPreviewText(key) {
   return (wrapPreviewText[currentLanguage] || wrapPreviewText.en)[key] || wrapPreviewText.en.full;
 }
 
+function getBrandingPreviewImageSrc(file) {
+  return `./assets/branding-options/${file}?v=${brandingPreviewAssetVersion}`;
+}
+
 function syncFormatters() {
   const locale = getLanguageCopy().locale;
   formatNumber = new Intl.NumberFormat(locale);
@@ -792,9 +797,9 @@ function updateWrapPreview() {
   const secondaryAngle = angles[1];
   const primaryAngleCopy = packagePreviewCopy.angles[0];
   const secondaryAngleCopy = packagePreviewCopy.angles[1];
-  const primaryImageSrc = `./assets/branding-options/${primaryAngle.file}`;
+  const primaryImageSrc = getBrandingPreviewImageSrc(primaryAngle.file);
   const secondaryImageSrc = secondaryAngle
-    ? `./assets/branding-options/${secondaryAngle.file}`
+    ? getBrandingPreviewImageSrc(secondaryAngle.file)
     : primaryImageSrc;
 
   wrapPreviewImage.src = primaryImageSrc;
