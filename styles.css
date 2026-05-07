@@ -4282,8 +4282,51 @@ body.compact-page {
     padding: 0.15rem;
   }
 
+  .wrap-preview-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
   .wrap-preview-media {
-    min-height: clamp(12rem, 56vw, 18rem);
+    display: block;
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: auto;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .wrap-preview-track {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .wrap-preview-frame {
+    position: relative;
+    inset: auto;
+    display: none;
+    width: 100%;
+    height: auto;
+    min-height: 12rem;
+    object-fit: contain;
+    opacity: 1;
+    transform: none;
+  }
+
+  .wrap-preview-frame.is-active {
+    display: block;
+    transform: none;
+  }
+
+  .wrap-preview-panel:hover .wrap-preview-frame.is-active {
+    transform: none;
+  }
+
+  .wrap-preview-slider {
+    bottom: 0.55rem;
   }
 
   .proposal-process-strip {

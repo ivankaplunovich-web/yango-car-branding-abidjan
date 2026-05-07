@@ -78,7 +78,7 @@ const proposalFormUrls = {
   fr: "https://forms.yandex.ru/surveys/13850502.773d2ad7cf8db43ddcfab8829cd896a0475d82d7",
 };
 
-const brandingPreviewAssetVersion = "20260507-2";
+const brandingPreviewAssetVersion = "20260507-3";
 const supportedLanguages = ["en", "fr"];
 const languageCopy = {
   en: {
