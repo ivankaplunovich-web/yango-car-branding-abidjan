@@ -2,7 +2,7 @@
 // comparison benchmarks come from Comparison table.xlsx.
 
 const pricingModel = {
-  baseCostUsdPerCarMonth: 300,
+  baseCostUsdPerCarMonth: 600,
   baseImpressionsPerCarMonth: 1700,
 };
 
@@ -109,9 +109,8 @@ const languageCopy = {
         ".hero-copy .lede",
         "Yango cars carry brands through Plateau, Yopougon, Cocody, Marcory, and airport routes.",
       ],
-      ['.cta-row a[href="#proposal"]', "Request proposal"],
+      [".hero-copy .cta-row .button-primary", "Request proposal"],
       ['.cta-row a[href="#planner"]', "Open planner"],
-      [".hero-location-row span:nth-child(5)", "Airport road"],
       [".hero-panel-kicker", "Audience in Ivory Coast"],
       [".hero-kpi-card:nth-child(1) span", "Average 2025 CIV audience"],
       [".hero-kpi-card:nth-child(2) span", "Average monthly OTS"],
@@ -195,11 +194,11 @@ const languageCopy = {
       [".proposal-process-strip li:nth-child(2) p", "Fleet size, wrap, duration."],
       [".proposal-process-strip li:nth-child(3) strong", "Launch"],
       [".proposal-process-strip li:nth-child(3) p", "Approve plan and roll out."],
-      [".proposal-action-card-lead span", "Sales Lead"],
-      [".proposal-action-card-lead strong", "Talk to Abdoulaye."],
+      [".proposal-action-card-lead span", "Sales Contact"],
+      [".proposal-action-card-lead strong", "Talk to Rowllings."],
       [
         ".proposal-action-card-lead p",
-        "Share timing, brand, and city focus directly with the local commercial lead.",
+        "Share timing, brand, and city focus directly with the local sales contact.",
       ],
       [".proposal-action-card-form span", "Request form"],
       [".proposal-action-card-form strong", "Send the planner."],
@@ -216,7 +215,6 @@ const languageCopy = {
     attrs: [
       [".site-nav", "aria-label", "Primary"],
       [".language-switcher", "aria-label", "Language"],
-      [".hero-location-row", "aria-label", "Coverage examples"],
       [".compact-channel-row", "aria-label", "Channel roles"],
       [".planner-console-map", "aria-label", "Representative Abidjan coverage map"],
       [".benchmark-sheet", "aria-label", "Benchmark comparison for the selected plan"],
@@ -253,9 +251,8 @@ const languageCopy = {
         ".hero-copy .lede",
         "Les voitures Yango portent les marques a travers Plateau, Yopougon, Cocody, Marcory et les routes de l'aeroport.",
       ],
-      ['.cta-row a[href="#proposal"]', "Demander une proposition"],
+      [".hero-copy .cta-row .button-primary", "Demander une proposition"],
       ['.cta-row a[href="#planner"]', "Ouvrir le planificateur"],
-      [".hero-location-row span:nth-child(5)", "Route aeroport"],
       [".hero-panel-kicker", "Audience en Cote d'Ivoire"],
       [".hero-kpi-card:nth-child(1) span", "Audience CIV moyenne 2025"],
       [".hero-kpi-card:nth-child(2) span", "OTS mensuel moyen"],
@@ -339,11 +336,11 @@ const languageCopy = {
       [".proposal-process-strip li:nth-child(2) p", "Taille de flotte, wrap, duree."],
       [".proposal-process-strip li:nth-child(3) strong", "Lancer"],
       [".proposal-process-strip li:nth-child(3) p", "Valider le plan et lancer."],
-      [".proposal-action-card-lead span", "Sales Lead"],
-      [".proposal-action-card-lead strong", "Parlez a Abdoulaye."],
+      [".proposal-action-card-lead span", "Responsable des ventes"],
+      [".proposal-action-card-lead strong", "Parlez a Rowllings."],
       [
         ".proposal-action-card-lead p",
-        "Partagez le timing, la marque et les zones prioritaires directement avec le responsable commercial local.",
+        "Partagez le timing, la marque et les zones prioritaires directement avec le responsable des ventes local.",
       ],
       [".proposal-action-card-form span", "Formulaire"],
       [".proposal-action-card-form strong", "Envoyer le plan."],
@@ -360,7 +357,6 @@ const languageCopy = {
     attrs: [
       [".site-nav", "aria-label", "Navigation principale"],
       [".language-switcher", "aria-label", "Langue"],
-      [".hero-location-row", "aria-label", "Exemples de couverture"],
       [".compact-channel-row", "aria-label", "Roles des canaux"],
       [".planner-console-map", "aria-label", "Carte representative de la couverture a Abidjan"],
       [".benchmark-sheet", "aria-label", "Comparaison benchmark du plan selectionne"],

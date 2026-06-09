@@ -430,18 +430,12 @@ textarea {
   background: rgba(255, 255, 255, 0.16);
 }
 
-.hero-location-row,
 .hero-utility-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
 }
 
-.hero-location-row {
-  margin-top: 1.35rem;
-}
-
-.hero-location-row span,
 .hero-utility-bar span {
   display: inline-flex;
   align-items: center;
@@ -2564,14 +2558,12 @@ textarea {
     max-width: 100%;
   }
 
-  .hero-location-row,
   .hero-utility-bar {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: stretch;
   }
 
-  .hero-location-row span,
   .hero-utility-bar span {
     width: auto;
   }
@@ -2767,7 +2759,6 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .hero-location-row,
   .hero-utility-bar,
   .choice-grid-packages,
   .segmented-grid,
@@ -2777,7 +2768,6 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .hero-location-row span,
   .hero-utility-bar span,
   .segmented-option-ui,
   .button {
@@ -2892,16 +2882,6 @@ body.compact-page {
 .compact-page .button {
   min-height: 3rem;
   padding: 0.78rem 1.1rem;
-  letter-spacing: 0;
-}
-
-.compact-page .hero-location-row {
-  margin-top: 1rem;
-}
-
-.compact-page .hero-location-row span {
-  padding: 0.48rem 0.74rem;
-  font-size: 0.78rem;
   letter-spacing: 0;
 }
 
@@ -3604,14 +3584,6 @@ body.compact-page {
   .compact-proof-header p:not(.eyebrow),
   .compact-planner-heading p:not(.eyebrow) {
     max-width: 100%;
-  }
-
-  .compact-page .hero-location-row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .compact-page .hero-location-row span {
-    min-height: 2.5rem;
   }
 
   .compact-proof-header h2,
