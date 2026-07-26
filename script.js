@@ -161,7 +161,10 @@ const languageCopy = {
       ],
       [".compact-media-table thead th:nth-child(1)", "Metric"],
       [".compact-media-table thead th:nth-child(3)", "Billboard"],
-      [".compact-media-table tbody tr:nth-child(1) th", "Impressions"],
+      [".compact-media-table tbody tr:nth-child(1) th", "Impressions, mln"],
+      [".compact-media-table tbody tr:nth-child(1) td:nth-child(2) strong", "7.08"],
+      [".compact-media-table tbody tr:nth-child(1) td:nth-child(3) strong", "4.76"],
+      [".compact-media-table tbody tr:nth-child(1) td:nth-child(4) strong", "0.37"],
       [".compact-media-table tbody tr:nth-child(1) td:nth-child(2) span", "moving reach"],
       [".compact-media-table tbody tr:nth-child(1) td:nth-child(3) span", "fixed reach"],
       [".compact-media-table tbody tr:nth-child(1) td:nth-child(4) span", "feed reach"],
@@ -202,13 +205,13 @@ const languageCopy = {
       [".planner-console-results .eyebrow-dark", "Illustrative result"],
       [".wrap-preview-copy .field-label", "Selected look"],
       [".result-card:nth-child(1) span", "Total budget"],
-      [".result-card:nth-child(2) span", "Projected impressions"],
+      [".result-card:nth-child(2) span", "Projected impressions, mln"],
       [".result-card:nth-child(3) span", "Estimated CPM"],
       [".result-card:nth-child(4) span", "Savings vs billboard"],
       [".benchmark-sheet-head strong", "Benchmark view"],
       [".benchmark-sheet-head span", "Same budget comparison"],
       [".benchmark-row-head span:nth-child(1)", "Channel"],
-      [".benchmark-row-head span:nth-child(2)", "Impressions"],
+      [".benchmark-row-head span:nth-child(2)", "Impressions, mln"],
       [".benchmark-sheet .benchmark-row:nth-child(4) > span", "Billboard"],
       [".proposal-copy .eyebrow", "Request proposal"],
       [".proposal-copy h2", "Launch your Abidjan campaign."],
@@ -324,7 +327,10 @@ const languageCopy = {
       ],
       [".compact-media-table thead th:nth-child(1)", "Metrique"],
       [".compact-media-table thead th:nth-child(3)", "Panneau"],
-      [".compact-media-table tbody tr:nth-child(1) th", "Impressions"],
+      [".compact-media-table tbody tr:nth-child(1) th", "Impressions, mln"],
+      [".compact-media-table tbody tr:nth-child(1) td:nth-child(2) strong", "7,08"],
+      [".compact-media-table tbody tr:nth-child(1) td:nth-child(3) strong", "4,76"],
+      [".compact-media-table tbody tr:nth-child(1) td:nth-child(4) strong", "0,37"],
       [".compact-media-table tbody tr:nth-child(1) td:nth-child(2) span", "portee mobile"],
       [".compact-media-table tbody tr:nth-child(1) td:nth-child(3) span", "portee fixe"],
       [".compact-media-table tbody tr:nth-child(1) td:nth-child(4) span", "portee feed"],
@@ -365,13 +371,13 @@ const languageCopy = {
       [".planner-console-results .eyebrow-dark", "Resultat indicatif"],
       [".wrap-preview-copy .field-label", "Apercu choisi"],
       [".result-card:nth-child(1) span", "Budget total"],
-      [".result-card:nth-child(2) span", "Impressions projetees"],
+      [".result-card:nth-child(2) span", "Impressions projetees, mln"],
       [".result-card:nth-child(3) span", "CPM estime"],
       [".result-card:nth-child(4) span", "Economies vs panneau"],
       [".benchmark-sheet-head strong", "Vue benchmark"],
       [".benchmark-sheet-head span", "Comparaison a budget egal"],
       [".benchmark-row-head span:nth-child(1)", "Canal"],
-      [".benchmark-row-head span:nth-child(2)", "Impressions"],
+      [".benchmark-row-head span:nth-child(2)", "Impressions, mln"],
       [".benchmark-sheet .benchmark-row:nth-child(4) > span", "Panneau"],
       [".proposal-copy .eyebrow", "Demander une proposition"],
       [".proposal-copy h2", "Lancez votre campagne a Abidjan."],
@@ -424,6 +430,9 @@ let formatUsdWhole = new Intl.NumberFormat(languageCopy[currentLanguage].locale,
 });
 let formatUsdPrecise = new Intl.NumberFormat(languageCopy[currentLanguage].locale, {
   minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+let formatMillions = new Intl.NumberFormat(languageCopy[currentLanguage].locale, {
   maximumFractionDigits: 2,
 });
 
@@ -684,6 +693,9 @@ function syncFormatters() {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
+  formatMillions = new Intl.NumberFormat(locale, {
+    maximumFractionDigits: 2,
+  });
 }
 
 function applyStaticTranslations() {
@@ -736,7 +748,11 @@ function formatMonthText(months) {
 }
 
 function formatImpressions(value) {
-  return formatNumber.format(Math.round(value));
+  return `${formatImpressionsMillions(value)} mln`;
+}
+
+function formatImpressionsMillions(value) {
+  return formatMillions.format(value / 1000000);
 }
 
 function getPlannerMetrics(packageKey, classKey, months, cars) {
@@ -981,9 +997,9 @@ function updatePlanner() {
   setBarWidth(impSocial, `${(socialImpressionsSameBudget / maxImpressions) * 100}%`);
   setBarWidth(impBillboard, `${(billboardImpressionsSameBudget / maxImpressions) * 100}%`);
 
-  impYangoLabel.textContent = formatImpressions(projectedImpressions);
-  impSocialLabel.textContent = formatImpressions(socialImpressionsSameBudget);
-  impBillboardLabel.textContent = formatImpressions(billboardImpressionsSameBudget);
+  impYangoLabel.textContent = formatImpressionsMillions(projectedImpressions);
+  impSocialLabel.textContent = formatImpressionsMillions(socialImpressionsSameBudget);
+  impBillboardLabel.textContent = formatImpressionsMillions(billboardImpressionsSameBudget);
 
   briefOutput.textContent = isCompactPage
     ? copy.brief({
