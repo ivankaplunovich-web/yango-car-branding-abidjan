@@ -38,7 +38,7 @@
     <link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="./assets/brand/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="./assets/brand/apple-touch-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260507-3" />
+    <link rel="stylesheet" href="./styles.css?v=20260726-2" />
   </head>
   <body class="compact-page">
     <header class="site-header">
@@ -156,7 +156,7 @@
 
             <div class="compact-media-table-wrap">
               <table class="compact-media-table">
-                <caption>Channel comparison per $1,000 invested</caption>
+                <caption>Econom + 4 doors + 3-month baseline per $1,000 invested</caption>
                 <thead>
                   <tr>
                     <th scope="col">Metric</th>
@@ -247,7 +247,7 @@
                 <p class="field-label">Package</p>
                 <div class="choice-grid choice-grid-packages">
                   <label class="choice-card">
-                    <input id="package-full" type="radio" name="package" value="full" checked />
+                    <input id="package-full" type="radio" name="package" value="full" />
                     <span class="choice-card-ui">
                       <span class="choice-title">4 doors + rear</span>
                       <span class="choice-copy">Maximum surface</span>
@@ -255,7 +255,7 @@
                   </label>
 
                   <label class="choice-card">
-                    <input id="package-double" type="radio" name="package" value="double" />
+                    <input id="package-double" type="radio" name="package" value="double" checked />
                     <span class="choice-card-ui">
                       <span class="choice-title">4 doors</span>
                       <span class="choice-copy">Side coverage</span>
@@ -324,23 +324,23 @@
             <div class="results-panel results-panel-compact planner-console-results" aria-live="polite">
               <div class="results-hero">
                 <p class="eyebrow eyebrow-dark">Illustrative result</p>
-                <h3 id="summary-title">300 cars - Full wrap</h3>
-                <p id="summary-copy">Maximum surface. 3 months city presence.</p>
+                <h3 id="summary-title">300 cars - 4 doors</h3>
+                <p id="summary-copy">Strong side view. 3 months city presence.</p>
               </div>
 
               <div class="wrap-preview-panel" aria-live="polite">
                 <div class="wrap-preview-copy">
                   <p class="field-label">Selected look</p>
-                  <h4 id="wrap-preview-title">Econom - 4 doors + back window</h4>
-                  <p id="wrap-preview-note">Maximum visible branded surface.</p>
+                  <h4 id="wrap-preview-title">Econom - 4 doors</h4>
+                  <p id="wrap-preview-note">Clean side-door coverage from both viewing angles.</p>
                 </div>
                 <figure class="wrap-preview-media" data-wrap-preview-slider>
                   <div class="wrap-preview-track">
                     <img
                       class="wrap-preview-frame is-active"
                       id="wrap-preview-image"
-                      src="./assets/branding-options/econom-4-doors-back-window.png?v=20260507-3"
-                      alt="Econom car branding preview with four doors and back window"
+                      src="./assets/branding-options/econom-2-doors-one-side.png?v=20260507-3"
+                      alt="Econom car branding preview with four branded doors, first side view"
                       loading="eager"
                       decoding="async"
                       fetchpriority="high"
@@ -348,8 +348,8 @@
                     <img
                       class="wrap-preview-frame wrap-preview-frame-secondary"
                       id="wrap-preview-image-alt"
-                      src="./assets/branding-options/econom-4-doors-back-window.png?v=20260507-3"
-                      alt="Econom car branding preview opposite side"
+                      src="./assets/branding-options/econom-4-doors.png?v=20260507-3"
+                      alt="Econom car branding preview with four branded doors, opposite side view"
                       loading="eager"
                       decoding="async"
                       aria-hidden="true"
@@ -369,7 +369,7 @@
               <div class="results-grid">
                 <article class="result-card">
                   <span>Total budget</span>
-                  <strong id="budget-output">$237,600</strong>
+                  <strong id="budget-output">$216,000</strong>
                 </article>
                 <article class="result-card">
                   <span>Projected impressions</span>
@@ -377,11 +377,11 @@
                 </article>
                 <article class="result-card">
                   <span>Estimated CPM</span>
-                  <strong id="cpm-output">$0.16</strong>
+                  <strong id="cpm-output">$0.14</strong>
                 </article>
                 <article class="result-card">
-                  <span>Savings vs billboard</span>
-                  <strong id="savings-output">$83,700</strong>
+                  <span id="savings-label">Savings vs billboard</span>
+                  <strong id="savings-output">$105,300</strong>
                 </article>
               </div>
 
@@ -400,24 +400,24 @@
                 <div class="benchmark-row benchmark-row-featured">
                   <span>Yango</span>
                   <strong id="imp-yango-label">1,530,000,000</strong>
-                  <strong id="bar-yango-label">$0.16 CPM</strong>
+                  <strong id="bar-yango-label">$0.14 CPM</strong>
                 </div>
 
                 <div class="benchmark-row">
                   <span>Billboard</span>
-                  <strong id="imp-billboard-label">1,131,428,571</strong>
+                  <strong id="imp-billboard-label">1,028,571,429</strong>
                   <strong id="bar-billboard-label">$0.21 CPM</strong>
                 </div>
 
                 <div class="benchmark-row">
                   <span>Social</span>
-                  <strong id="imp-social-label">88,000,000</strong>
+                  <strong id="imp-social-label">80,000,000</strong>
                   <strong id="bar-social-label">$2.70 CPM</strong>
                 </div>
               </div>
 
               <article class="brief-card" id="brief-output">
-                1,530,000,000 impressions, $237,600 budget, $83,700 saved vs billboard CPM.
+                1,530,000,000 impressions, $216,000 budget, $105,300 saved vs billboard CPM.
               </article>
             </div>
           </div>
@@ -529,7 +529,7 @@
     </footer>
 
     <script src="./assets/map/abidjan-basemap-data.js?v=20260507-3"></script>
-    <script src="./planner-map.js?v=20260726-1"></script>
-    <script src="./script.js?v=20260726-1"></script>
+    <script src="./planner-map.js?v=20260726-2"></script>
+    <script src="./script.js?v=20260726-2"></script>
   </body>
 </html>

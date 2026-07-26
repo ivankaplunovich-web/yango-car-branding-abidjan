@@ -6,6 +6,7 @@
 
   const scenario = {
     mapFleet: 20,
+    selectedCars: 300,
     sizeClass: "b",
     speedMultiplier: 0.98,
     clusterWeights: {
@@ -34,14 +35,16 @@
   const mapCopy = {
     en: {
       aria: "OpenStreetMap based Abidjan coverage view with representative branded fleet motion",
-      attribution: "Map data © OpenStreetMap contributors · representative 300-car campaign view",
+      attribution: (cars) =>
+        `Map data © OpenStreetMap contributors · representative ${cars}-car campaign view`,
       labels: {
         "Airport road": "Airport road",
       },
     },
     fr: {
       aria: "Vue de couverture d'Abidjan basee sur OpenStreetMap avec mouvement de flotte representative",
-      attribution: "Donnees carte © contributeurs OpenStreetMap · vue representative d'une campagne 300 voitures",
+      attribution: (cars) =>
+        `Donnees carte © contributeurs OpenStreetMap · campagne representative ${cars} voitures`,
       labels: {
         "Airport road": "Route aeroport",
       },
@@ -595,8 +598,15 @@
           `,
         )
         .join("")}
-      <p class="planner-map-attribution">${escapeHtml(copy.attribution)}</p>
+      <p class="planner-map-attribution">${escapeHtml(copy.attribution(scenario.selectedCars))}</p>
     `;
+  }
+
+  function updateAttribution(language = window.YANGO_PLANNER_LANGUAGE || "en") {
+    const attribution = target.querySelector(".planner-map-attribution");
+    if (!attribution) return;
+
+    attribution.textContent = getMapCopy(language).attribution(scenario.selectedCars);
   }
 
   function setMapLanguage(language) {
@@ -605,8 +615,7 @@
     target.querySelectorAll("[data-label-name]").forEach((label) => {
       label.textContent = localizeLabel(label.dataset.labelName, language);
     });
-    const attribution = target.querySelector(".planner-map-attribution");
-    if (attribution) attribution.textContent = copy.attribution;
+    updateAttribution(language);
   }
 
   function renderVehiclePose(vehicle, pose) {
@@ -659,6 +668,9 @@
     const selectedCars = Number(cars);
     const nextFleet =
       fleetDensityByCars[selectedCars] || Math.round(clamp(selectedCars / 26, 12, 42));
+
+    scenario.selectedCars = selectedCars;
+    updateAttribution();
 
     if (nextFleet === scenario.mapFleet) return;
 

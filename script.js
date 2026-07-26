@@ -8,19 +8,19 @@ const pricingModel = {
 
 const packages = {
   full: {
-    label: "4 doors + back window",
+    label: "4 doors + rear",
     costMultiplier: 1.1,
     impressionMultiplier: 1,
     note: "Maximum surface coverage around the vehicle with side doors plus rear-window visibility.",
   },
   double: {
-    label: "2 sides only",
+    label: "4 doors",
     costMultiplier: 1,
     impressionMultiplier: 1,
     note: "Strong side-door visibility with lighter production intensity than a full wrap.",
   },
   single: {
-    label: "1 side only",
+    label: "Only 2 doors",
     costMultiplier: 0.9,
     impressionMultiplier: 0.8,
     note: "The lightest wrap entry point for a tactical one-side presence.",
@@ -96,12 +96,30 @@ const languageCopy = {
     carPlural: "cars",
     cpm: "CPM",
     budget: "budget",
-    saved: "saved",
     cityPresence: "city presence",
     mapTitle: "Abidjan fleet coverage",
     mapDensity: (cars) => `${cars}-car visual density.`,
-    brief: (impressions, budget, savings) =>
-      `${impressions} impressions, ${budget} budget, ${savings} saved.`,
+    savingsPositiveLabel: "Savings vs billboard",
+    savingsNegativeLabel: "Additional cost vs billboard",
+    brief: ({ impressions, budget, difference, isSavings }) =>
+      isSavings
+        ? `${impressions} impressions, ${budget} budget, ${difference} saved vs billboard CPM.`
+        : `${impressions} impressions, ${budget} budget, ${difference} additional cost vs billboard CPM.`,
+    expandedBrief: ({
+      months,
+      cars,
+      classLabel,
+      packageLabel,
+      impressions,
+      budget,
+      difference,
+      isSavings,
+    }) =>
+      `${months} on ${cars} ${classLabel.toLowerCase()} with ${packageLabel.toLowerCase()} gives your brand ${impressions} impressions on a ${budget} budget and ${
+        isSavings
+          ? `keeps ${difference} in hand versus billboard CPM`
+          : `adds ${difference} versus billboard CPM`
+      } for the same level of exposure.`,
     staticText: [
       [".brand-mark span:last-child", "Yango Car Branding"],
       ['.site-nav a[href="#proof"]', "Why it works"],
@@ -137,7 +155,10 @@ const languageCopy = {
       [".compact-channel:nth-child(3) span", "Support"],
       [".compact-channel:nth-child(3) strong", "Social"],
       [".compact-channel:nth-child(3) p", "Fast targeting, short attention."],
-      [".compact-media-table caption", "Channel comparison per $1,000 invested"],
+      [
+        ".compact-media-table caption",
+        "Econom + 4 doors + 3-month baseline per $1,000 invested",
+      ],
       [".compact-media-table thead th:nth-child(1)", "Metric"],
       [".compact-media-table thead th:nth-child(3)", "Billboard"],
       [".compact-media-table tbody tr:nth-child(1) th", "Impressions"],
@@ -238,12 +259,30 @@ const languageCopy = {
     carPlural: "voitures",
     cpm: "CPM",
     budget: "budget",
-    saved: "economises",
     cityPresence: "de presence en ville",
     mapTitle: "Couverture de flotte a Abidjan",
     mapDensity: (cars) => `Densite visuelle de ${cars} voitures.`,
-    brief: (impressions, budget, savings) =>
-      `${impressions} impressions, ${budget} de budget, ${savings} economises.`,
+    savingsPositiveLabel: "Economies vs panneau",
+    savingsNegativeLabel: "Surcout vs panneau",
+    brief: ({ impressions, budget, difference, isSavings }) =>
+      isSavings
+        ? `${impressions} impressions, ${budget} de budget, ${difference} economises vs CPM panneau.`
+        : `${impressions} impressions, ${budget} de budget, ${difference} de surcout vs CPM panneau.`,
+    expandedBrief: ({
+      months,
+      cars,
+      classLabel,
+      packageLabel,
+      impressions,
+      budget,
+      difference,
+      isSavings,
+    }) =>
+      `${months} sur ${cars} ${classLabel.toLowerCase()} avec ${packageLabel.toLowerCase()} donne a votre marque ${impressions} impressions pour un budget de ${budget} et ${
+        isSavings
+          ? `economise ${difference} par rapport au CPM panneau`
+          : `ajoute ${difference} par rapport au CPM panneau`
+      } pour le meme niveau d'exposition.`,
     staticText: [
       [".brand-mark span:last-child", "Yango Car Branding"],
       ['.site-nav a[href="#proof"]', "Pourquoi ca marche"],
@@ -279,7 +318,10 @@ const languageCopy = {
       [".compact-channel:nth-child(3) span", "Support"],
       [".compact-channel:nth-child(3) strong", "Social"],
       [".compact-channel:nth-child(3) p", "Ciblage rapide, attention courte."],
-      [".compact-media-table caption", "Comparaison des canaux par 1 000 $ investis"],
+      [
+        ".compact-media-table caption",
+        "Base Econom + 4 portes + 3 mois par 1 000 $ investis",
+      ],
       [".compact-media-table thead th:nth-child(1)", "Metrique"],
       [".compact-media-table thead th:nth-child(3)", "Panneau"],
       [".compact-media-table tbody tr:nth-child(1) th", "Impressions"],
@@ -403,6 +445,7 @@ const summaryCopy = document.getElementById("summary-copy");
 const budgetOutput = document.getElementById("budget-output");
 const impressionsOutput = document.getElementById("impressions-output");
 const cpmOutput = document.getElementById("cpm-output");
+const savingsLabel = document.getElementById("savings-label");
 const savingsOutput = document.getElementById("savings-output");
 const briefOutput = document.getElementById("brief-output");
 
@@ -426,19 +469,19 @@ const proposalLinks = document.querySelectorAll("[data-proposal-link]");
 const packageText = {
   en: {
     full: {
-      label: "4 doors + back window",
+      label: "4 doors + rear",
       compactTitle: "4 doors + rear",
       compactNote: "Maximum surface.",
       note: "Maximum surface coverage around the vehicle with side doors plus rear-window visibility.",
     },
     double: {
-      label: "2 sides only",
+      label: "4 doors",
       compactTitle: "4 doors",
       compactNote: "Strong side view.",
       note: "Strong side-door visibility with lighter production intensity than a full wrap.",
     },
     single: {
-      label: "1 side only",
+      label: "Only 2 doors",
       compactTitle: "Only 2 doors",
       compactNote: "Focused entry.",
       note: "The lightest wrap entry point for a tactical one-side presence.",
@@ -446,19 +489,19 @@ const packageText = {
   },
   fr: {
     full: {
-      label: "4 portes + vitre arriere",
+      label: "4 portes + arriere",
       compactTitle: "4 portes + arriere",
       compactNote: "Surface maximale.",
       note: "Couverture maximale autour du vehicule avec portes laterales et visibilite arriere.",
     },
     double: {
-      label: "2 cotes seulement",
+      label: "4 portes",
       compactTitle: "4 portes",
       compactNote: "Vue laterale forte.",
       note: "Visibilite forte sur les portes laterales avec une production plus legere qu'un wrap complet.",
     },
     single: {
-      label: "1 cote seulement",
+      label: "Seulement 2 portes",
       compactTitle: "Seulement 2 portes",
       compactNote: "Entree ciblee.",
       note: "Le format d'entree le plus leger pour une presence tactique sur un cote.",
@@ -500,7 +543,7 @@ const vehicleClassText = {
 const wrapPreviewText = {
   en: {
     full: {
-      label: "4 doors + back window",
+      label: "4 doors + rear",
       note: "Maximum visible branded surface.",
       alt: "car branding preview with four doors and back window",
       angles: [
@@ -526,7 +569,7 @@ const wrapPreviewText = {
   },
   fr: {
     full: {
-      label: "4 portes + vitre arriere",
+      label: "4 portes + arriere",
       note: "Surface marquee visible maximale.",
       alt: "apercu de marquage auto avec quatre portes et vitre arriere",
       angles: [
@@ -566,7 +609,7 @@ const compactPackageTitles = {
 
 const wrapPreviewPackages = {
   full: {
-    label: "4 doors + back window",
+    label: "4 doors + rear",
     note: "Maximum visible branded surface.",
     alt: "car branding preview with four doors and back window",
     classImages: {
@@ -758,7 +801,7 @@ function getPlannerSnapshot() {
     car_class_label: getVehicleClassText(classKey).label,
     budget_usd: Math.round(budgetUsd),
     impressions: Math.round(projectedImpressions),
-    cpm: cpm.toFixed(2),
+    cpm: cpm.toFixed(4),
     savings_usd: Math.round(savingsVsBillboard),
     language: currentLanguage,
     page_url: window.location.href,
@@ -918,7 +961,14 @@ function updatePlanner() {
   budgetOutput.textContent = formatUsd(budgetUsd);
   impressionsOutput.textContent = formatImpressions(projectedImpressions);
   cpmOutput.textContent = formatUsdCpm(cpm);
-  savingsOutput.textContent = formatUsd(savingsVsBillboard);
+  const isSavings = savingsVsBillboard >= 0;
+  const formattedDifference = formatUsd(Math.abs(savingsVsBillboard));
+  if (savingsLabel) {
+    savingsLabel.textContent = isSavings
+      ? copy.savingsPositiveLabel
+      : copy.savingsNegativeLabel;
+  }
+  savingsOutput.textContent = formattedDifference;
 
   setBarWidth(barYango, `${(minCpm / cpm) * 100}%`);
   setBarWidth(barSocial, `${(minCpm / benchmarks.social) * 100}%`);
@@ -936,20 +986,22 @@ function updatePlanner() {
   impBillboardLabel.textContent = formatImpressions(billboardImpressionsSameBudget);
 
   briefOutput.textContent = isCompactPage
-    ? copy.brief(
-        formatImpressions(projectedImpressions),
-        formatUsd(budgetUsd),
-        formatUsd(savingsVsBillboard),
-      )
-    : `${formatMonthText(months)} on ${formatNumber.format(
-        cars,
-      )} ${selectedClassCopy.label.toLowerCase()} with ${selectedPackageCopy.label.toLowerCase()} gives your brand ${formatImpressions(
-        projectedImpressions,
-      )} impressions on a ${formatUsd(
-        budgetUsd,
-      )} budget and keeps ${formatUsd(
-        savingsVsBillboard,
-      )} in hand versus billboard CPM for the same level of exposure.`;
+    ? copy.brief({
+        impressions: formatImpressions(projectedImpressions),
+        budget: formatUsd(budgetUsd),
+        difference: formattedDifference,
+        isSavings,
+      })
+    : copy.expandedBrief({
+        months: formatMonthText(months),
+        cars: formatNumber.format(cars),
+        classLabel: selectedClassCopy.label,
+        packageLabel: selectedPackageCopy.label,
+        impressions: formatImpressions(projectedImpressions),
+        budget: formatUsd(budgetUsd),
+        difference: formattedDifference,
+        isSavings,
+      });
 
   updateProposalLinks();
 }

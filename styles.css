@@ -1491,6 +1491,12 @@ output {
     color 220ms ease;
 }
 
+.choice-card input:focus-visible + .choice-card-ui,
+.segmented-option input:focus-visible + .segmented-option-ui {
+  outline: 3px solid rgba(255, 0, 0, 0.48);
+  outline-offset: 3px;
+}
+
 .choice-card-ui {
   min-height: 100%;
   padding: 0.95rem;
