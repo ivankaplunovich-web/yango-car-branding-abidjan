@@ -168,13 +168,13 @@
                 <tbody>
                   <tr>
                     <th scope="row">Impressions</th>
-                    <td><strong>14,280k</strong><span>moving reach</span></td>
-                    <td><strong>4,760k</strong><span>fixed reach</span></td>
+                    <td><strong>7,083k</strong><span>moving reach</span></td>
+                    <td><strong>4,762k</strong><span>fixed reach</span></td>
                     <td><strong>370k</strong><span>feed reach</span></td>
                   </tr>
                   <tr>
                     <th scope="row">CPM</th>
-                    <td><strong>$0.07</strong><span>lowest cost</span></td>
+                    <td><strong>$0.14</strong><span>lowest cost</span></td>
                     <td><strong>$0.21</strong><span>OOH benchmark</span></td>
                     <td><strong>$2.70</strong><span>paid social</span></td>
                   </tr>
@@ -220,7 +220,7 @@
               <div class="input-group planner-control-block planner-fleet-block">
                   <div class="label-row">
                     <p class="field-label">Branded cars</p>
-                    <output id="cars-value" for="cars-100 cars-300 cars-500 cars-1000">300 cars</output>
+                    <output id="cars-value" for="cars-100 cars-300 cars-600 cars-1000">300 cars</output>
                   </div>
                   <div class="segmented-grid fleet-segmented-grid">
                     <label class="segmented-option">
@@ -232,8 +232,8 @@
                       <span class="segmented-option-ui">300</span>
                     </label>
                     <label class="segmented-option">
-                      <input id="cars-500" type="radio" name="cars" value="500" />
-                      <span class="segmented-option-ui">500</span>
+                      <input id="cars-600" type="radio" name="cars" value="600" />
+                      <span class="segmented-option-ui">600</span>
                     </label>
                     <label class="segmented-option">
                       <input id="cars-1000" type="radio" name="cars" value="1000" />
@@ -276,9 +276,9 @@
                 <div class="input-group planner-control-block">
                 <div class="label-row">
                   <p class="field-label">Duration</p>
-                  <output id="months-value" for="months-1 months-3 months-6 months-12">3 months</output>
+                  <output id="months-value" for="months-1 months-3 months-6 months-9 months-12">3 months</output>
                 </div>
-                <div class="segmented-grid">
+                <div class="segmented-grid duration-segmented-grid">
                   <label class="segmented-option">
                     <input id="months-1" type="radio" name="months" value="1" />
                     <span class="segmented-option-ui">1m</span>
@@ -290,6 +290,10 @@
                   <label class="segmented-option">
                     <input id="months-6" type="radio" name="months" value="6" />
                     <span class="segmented-option-ui">6m</span>
+                  </label>
+                  <label class="segmented-option">
+                    <input id="months-9" type="radio" name="months" value="9" />
+                    <span class="segmented-option-ui">9m</span>
                   </label>
                   <label class="segmented-option">
                     <input id="months-12" type="radio" name="months" value="12" />
@@ -365,19 +369,19 @@
               <div class="results-grid">
                 <article class="result-card">
                   <span>Total budget</span>
-                  <strong id="budget-output">$118,800</strong>
+                  <strong id="budget-output">$237,600</strong>
                 </article>
                 <article class="result-card">
                   <span>Projected impressions</span>
-                  <strong id="impressions-output">1,530,000</strong>
+                  <strong id="impressions-output">1,530,000,000</strong>
                 </article>
                 <article class="result-card">
                   <span>Estimated CPM</span>
-                  <strong id="cpm-output">$0.08</strong>
+                  <strong id="cpm-output">$0.16</strong>
                 </article>
                 <article class="result-card">
                   <span>Savings vs billboard</span>
-                  <strong id="savings-output">$202,500</strong>
+                  <strong id="savings-output">$83,700</strong>
                 </article>
               </div>
 
@@ -395,25 +399,25 @@
 
                 <div class="benchmark-row benchmark-row-featured">
                   <span>Yango</span>
-                  <strong id="imp-yango-label">1,530,000</strong>
-                  <strong id="bar-yango-label">$0.08 CPM</strong>
+                  <strong id="imp-yango-label">1,530,000,000</strong>
+                  <strong id="bar-yango-label">$0.16 CPM</strong>
                 </div>
 
                 <div class="benchmark-row">
                   <span>Billboard</span>
-                  <strong id="imp-billboard-label">565,714</strong>
+                  <strong id="imp-billboard-label">1,131,428,571</strong>
                   <strong id="bar-billboard-label">$0.21 CPM</strong>
                 </div>
 
                 <div class="benchmark-row">
                   <span>Social</span>
-                  <strong id="imp-social-label">44,000</strong>
+                  <strong id="imp-social-label">88,000,000</strong>
                   <strong id="bar-social-label">$2.70 CPM</strong>
                 </div>
               </div>
 
               <article class="brief-card" id="brief-output">
-                1,530,000 impressions, $118,800 budget, $202,500 saved vs billboard CPM.
+                1,530,000,000 impressions, $237,600 budget, $83,700 saved vs billboard CPM.
               </article>
             </div>
           </div>
@@ -525,7 +529,7 @@
     </footer>
 
     <script src="./assets/map/abidjan-basemap-data.js?v=20260507-3"></script>
-    <script src="./planner-map.js?v=20260507-3"></script>
-    <script src="./script.js?v=20260507-3"></script>
+    <script src="./planner-map.js?v=20260726-1"></script>
+    <script src="./script.js?v=20260726-1"></script>
   </body>
 </html>

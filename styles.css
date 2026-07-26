@@ -1457,6 +1457,10 @@ output {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.duration-segmented-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .segmented-grid-two {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -2450,6 +2454,10 @@ textarea {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .duration-segmented-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .results-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3270,6 +3278,10 @@ body.compact-page {
   gap: 0.42rem;
 }
 
+.planner-console .duration-segmented-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .planner-console .choice-grid-packages {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -3622,6 +3634,10 @@ body.compact-page {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .planner-console .duration-segmented-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .planner-console .segmented-grid-two {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3652,6 +3668,10 @@ body.compact-page {
 
   .planner-console .choice-grid-packages {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .planner-console .duration-segmented-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .planner-console-results .results-grid,

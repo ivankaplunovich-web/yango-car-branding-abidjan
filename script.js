@@ -3,7 +3,7 @@
 
 const pricingModel = {
   baseCostUsdPerCarMonth: 600,
-  baseImpressionsPerCarMonth: 1700,
+  baseImpressionsPerCarMonth: 1700000,
 };
 
 const packages = {
@@ -16,7 +16,7 @@ const packages = {
   double: {
     label: "2 sides only",
     costMultiplier: 1,
-    impressionMultiplier: 0.95,
+    impressionMultiplier: 1,
     note: "Strong side-door visibility with lighter production intensity than a full wrap.",
   },
   single: {
@@ -43,8 +43,13 @@ const durations = {
     impressionMultiplier: 1,
     note: "The 6-month workbook multiplier pushes cost efficiency much further for sustained visibility.",
   },
+  9: {
+    costMultiplier: 0.2,
+    impressionMultiplier: 1,
+    note: "The 9-month workbook multiplier extends the same monthly impression logic across a longer campaign.",
+  },
   12: {
-    costMultiplier: 0.18333333333333332,
+    costMultiplier: 0.175,
     impressionMultiplier: 1,
     note: "The 12-month workbook multiplier gives the lowest unit cost in the planning file.",
   },
@@ -68,7 +73,6 @@ const vehicleClasses = {
 };
 
 const benchmarks = {
-  yango: 0.07,
   billboard: 0.21,
   social: 2.7,
 };
@@ -692,32 +696,58 @@ function formatImpressions(value) {
   return formatNumber.format(Math.round(value));
 }
 
+function getPlannerMetrics(packageKey, classKey, months, cars) {
+  const selectedPackage = packages[packageKey] || packages.full;
+  const selectedDuration = durations[months] || durations[3];
+  const selectedClass = vehicleClasses[classKey] || vehicleClasses.econom;
+  const pricePerCarPerMonth =
+    pricingModel.baseCostUsdPerCarMonth * selectedDuration.costMultiplier;
+
+  const budgetUsd =
+    pricePerCarPerMonth *
+    cars *
+    months *
+    selectedPackage.costMultiplier *
+    selectedClass.costMultiplier;
+
+  const projectedImpressions =
+    pricingModel.baseImpressionsPerCarMonth *
+    selectedPackage.impressionMultiplier *
+    selectedClass.impressionMultiplier *
+    cars *
+    months;
+
+  const cpm = (budgetUsd / projectedImpressions) * 1000;
+  const billboardEquivalent = (projectedImpressions / 1000) * benchmarks.billboard;
+  const savingsVsBillboard = billboardEquivalent - budgetUsd;
+  const socialImpressionsSameBudget = (budgetUsd / benchmarks.social) * 1000;
+  const billboardImpressionsSameBudget = (budgetUsd / benchmarks.billboard) * 1000;
+
+  return {
+    selectedPackage,
+    selectedDuration,
+    selectedClass,
+    budgetUsd,
+    projectedImpressions,
+    cpm,
+    billboardEquivalent,
+    savingsVsBillboard,
+    socialImpressionsSameBudget,
+    billboardImpressionsSameBudget,
+  };
+}
+
 function getPlannerSnapshot() {
   const packageKey = getCheckedValue("package");
   const classKey = getCheckedValue("vehicleClass");
   const months = Number(getCheckedValue("months"));
   const cars = Number(getCheckedValue("cars"));
-  const selectedPackage = packages[packageKey] || packages.full;
-  const selectedDuration = durations[months] || durations[3];
-  const selectedClass = vehicleClasses[classKey] || vehicleClasses.econom;
-
-  const budgetUsd =
-    pricingModel.baseCostUsdPerCarMonth *
-    selectedPackage.costMultiplier *
-    selectedDuration.costMultiplier *
-    selectedClass.costMultiplier *
-    cars *
-    months;
-
-  const projectedImpressions =
-    pricingModel.baseImpressionsPerCarMonth *
-    selectedPackage.impressionMultiplier *
-    selectedDuration.impressionMultiplier *
-    selectedClass.impressionMultiplier *
-    cars *
-    months;
-  const cpm = budgetUsd / projectedImpressions;
-  const savingsVsBillboard = projectedImpressions * benchmarks.billboard - budgetUsd;
+  const { budgetUsd, projectedImpressions, cpm, savingsVsBillboard } = getPlannerMetrics(
+    packageKey,
+    classKey,
+    months,
+    cars,
+  );
 
   return {
     cars,
@@ -853,36 +883,19 @@ function updatePlanner() {
   const packageKey = getCheckedValue("package");
   const classKey = getCheckedValue("vehicleClass");
   const copy = getLanguageCopy();
-  const selectedPackage = packages[packageKey];
   const selectedPackageCopy = getPackageText(packageKey);
   const months = Number(getCheckedValue("months"));
-  const selectedDuration = durations[months];
-  const selectedClass = vehicleClasses[classKey];
   const selectedClassCopy = getVehicleClassText(classKey);
   const cars = Number(getCheckedValue("cars"));
-
-  const budgetUsd =
-    pricingModel.baseCostUsdPerCarMonth *
-    selectedPackage.costMultiplier *
-    selectedDuration.costMultiplier *
-    selectedClass.costMultiplier *
-    cars *
-    months;
-
-  const projectedImpressions =
-    pricingModel.baseImpressionsPerCarMonth *
-    selectedPackage.impressionMultiplier *
-    selectedDuration.impressionMultiplier *
-    selectedClass.impressionMultiplier *
-    cars *
-    months;
-  const cpm = budgetUsd / projectedImpressions;
-
-  const billboardEquivalent = projectedImpressions * benchmarks.billboard;
-  const savingsVsBillboard = billboardEquivalent - budgetUsd;
+  const {
+    budgetUsd,
+    projectedImpressions,
+    cpm,
+    savingsVsBillboard,
+    socialImpressionsSameBudget,
+    billboardImpressionsSameBudget,
+  } = getPlannerMetrics(packageKey, classKey, months, cars);
   const minCpm = Math.min(cpm, benchmarks.social, benchmarks.billboard);
-  const socialImpressionsSameBudget = budgetUsd / benchmarks.social;
-  const billboardImpressionsSameBudget = budgetUsd / benchmarks.billboard;
   const maxImpressions = Math.max(
     projectedImpressions,
     socialImpressionsSameBudget,
